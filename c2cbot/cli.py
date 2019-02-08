@@ -20,7 +20,7 @@ from c2cbot.__version__ import cli_version, cli_name
               default=None,
               type=str)
 def c2cbot(c2cbotaccess, rttapi_username, rttapi_password, rttapi_url):
-    """Main entry for c2cbot_cli."""
+    """c2cbot_cli - cli tool to search and print stats."""
     print_version(cli_name, cli_version)
     if rttapi_username is None or rttapi_password is None: 
         click.secho("An API username and password must be passed when"
