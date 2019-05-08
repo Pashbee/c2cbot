@@ -108,3 +108,6 @@ venv.bak/
 
 # swap files
 *.swp
+
+# hidden example files
+.example
