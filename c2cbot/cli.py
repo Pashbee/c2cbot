@@ -1,5 +1,6 @@
 import sys
 import click
+from datetime import datetime
 from c2cbot.cli_helpers import print_version
 from c2cbot.__version__ import cli_version, cli_name
 
@@ -33,15 +34,44 @@ def c2cbot(c2cbotaccess, rttapi_username, rttapi_password, rttapi_url):
                         "api_url": rttapi_url}
 
 
-@click.command('search')
+@click.command('search',
+               help='''
+               Search sub-command to run a service search.  
+               ''')
 @click.option('--startstation',
               help='''
-              
-              ''',)
+              Start station CRS code. Use https://www.nationalrail.co.uk/stations_destinations/48541.aspx to find station code. 
+              ''',
+              default='FST')
+@click.option('--endstation',
+              help='''
+              End station CRS code. Use https://www.nationalrail.co.uk/stations_destinations/48541.aspx to find station code. 
+              ''',
+              default='SRY')
+@click.option('--date',
+              help='''
+              Date for the search in DDMMYYYY (ie. 01012019)
+              ''',
+              default=datetime.now().strftime('%d%m%Y'))
+@click.option('--starttime',
+              help='''
+              Start time for the search in 24hr HHMM (ie. 1743)
+              ''',
+              default=datetime.now().strftime('%H%M'))
+@click.option('--endtime',
+              help='''
+              End time for the search in 24hr HHMM (ie. 1743)
+              ''',
+              default='2359')
 @click.pass_obj
-def search(c2cbotaccess, startstation):
+def search(c2cbotaccess, startstation, endstation, date, starttime, endtime):
     """search sub-command to run a service search."""
-    pass
+    print('{0}-{1}-{2}-{3}-{4}-{5}'.format(c2cbotaccess['api_username'], 
+                                           startstation,
+                                           endstation,
+                                           date,
+                                           starttime,
+                                           endtime))
 
 # Register sub-commands.
 
