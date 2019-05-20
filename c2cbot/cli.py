@@ -3,6 +3,7 @@ import click
 from datetime import datetime
 from c2cbot.cli_helpers import print_version
 from c2cbot.__version__ import cli_version, cli_name
+import rttapi 
 
 
 @click.group()
@@ -34,7 +35,7 @@ def c2cbot(c2cbotaccess, rttapi_username, rttapi_password, rttapi_url):
                         "api_url": rttapi_url}
 
 
-@click.command('search',
+@click.command('service',
                help='''
                Search sub-command to run a service search.  
                ''')
@@ -64,18 +65,22 @@ def c2cbot(c2cbotaccess, rttapi_username, rttapi_password, rttapi_url):
               ''',
               default='2359')
 @click.pass_obj
-def search(c2cbotaccess, startstation, endstation, date, starttime, endtime):
+def service(c2cbotaccess, startstation, endstation, date, starttime, endtime):
     """search sub-command to run a service search."""
-    print('{0}-{1}-{2}-{3}-{4}-{5}'.format(c2cbotaccess['api_username'], 
+    click.secho('{0}-{1}-{2}-{3}-{4}-{5}'.format(c2cbotaccess['api_username'], 
                                            startstation,
                                            endstation,
                                            date,
                                            starttime,
                                            endtime))
+    ss = rttapi.resource("service", 
+                         c2cbotaccess['api_username'],
+                         c2cbotaccess['api_password'])
+
 
 # Register sub-commands.
 
-c2cbot.add_command(search)
+c2cbot.add_command(service)
 
 if __name__ == "__main__":
     c2cbot()
