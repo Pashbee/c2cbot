@@ -41,13 +41,13 @@ def c2cbot(c2cbotaccess, rttapi_username, rttapi_password, rttapi_url):
                ''')
 @click.option('--startstation',
               help='''
-              Start station CRS code. Use https://www.nationalrail.co.uk/stations_destinations/48541.aspx to find station code. 
-              ''',
+              Start station CRS code. Use https://www.nationalrail.co.uk/
+              stations_destinations/48541.aspx to find the station code.''',
               default='FST')
 @click.option('--endstation',
               help='''
-              End station CRS code. Use https://www.nationalrail.co.uk/stations_destinations/48541.aspx to find station code. 
-              ''',
+              End station CRS code. Use https://www.nationalrail.co.uk/
+              stations_destinations/48541.aspx to find the station code.''',
               default='SRY')
 @click.option('--date',
               help='''
