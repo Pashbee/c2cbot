@@ -1,3 +1,5 @@
+# pylint: disable=no-value-for-parameter
+
 import sys
 import click
 from datetime import datetime
@@ -49,9 +51,14 @@ def c2cbot(c2cbotaccess, rttapi_username, rttapi_password, rttapi_url):
               End station CRS code. Use https://www.nationalrail.co.uk/
               stations_destinations/48541.aspx to find the station code.''',
               default='SRY')
-@click.option('--date',
+@click.option('--startdate',
               help='''
-              Date for the search in DDMMYYYY (ie. 01012019)
+              Start Date for the search in DDMMYYYY (ie. 01012019)
+              ''',
+              default=datetime.now().strftime('%d%m%Y'))
+@click.option('--enddate',
+              help='''
+              End Date for the search in DDMMYYYY (ie. 01012019)
               ''',
               default=datetime.now().strftime('%d%m%Y'))
 @click.option('--starttime',
@@ -65,17 +72,16 @@ def c2cbot(c2cbotaccess, rttapi_username, rttapi_password, rttapi_url):
               ''',
               default='2359')
 @click.pass_obj
-def service(c2cbotaccess, startstation, endstation, date, starttime, endtime):
+def service(c2cbotaccess, startstation, endstation, startdate, enddate, 
+            starttime, endtime):
     """search sub-command to run a service search."""
     click.secho('{0}-{1}-{2}-{3}-{4}-{5}'.format(c2cbotaccess['api_username'], 
                                            startstation,
                                            endstation,
-                                           date,
+                                           startdate,
                                            starttime,
                                            endtime))
-    ss = rttapi.resource("service", 
-                         c2cbotaccess['api_username'],
-                         c2cbotaccess['api_password'])
+    ss = rttapi.resource("service", c2cbotaccess)
 
 
 # Register sub-commands.
