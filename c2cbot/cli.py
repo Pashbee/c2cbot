@@ -82,6 +82,12 @@ def service(c2cbotaccess, startstation, endstation, startdate, enddate,
                                            starttime,
                                            endtime))
     ss = rttapi.resource("service", c2cbotaccess)
+    print(ss.get_service(ststat=startstation,
+                         enstat=endstation,
+                         stdate=startdate,
+                         endate=enddate,
+                         sttime=starttime,
+                         entime=endtime))
 
 
 # Register sub-commands.
