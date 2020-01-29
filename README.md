@@ -13,6 +13,7 @@ Easy as:-
 
 ```
 git clone https://github.com/Pashbee/c2cbot.git 
+cd c2cbot/
 make setup
 ```
 && then:-
