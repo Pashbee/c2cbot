@@ -23,13 +23,12 @@ class ServiceList:
 
     def get_service(self, **kwargs):
         stdate = datetime.strptime(kwargs['stdate'], '%d%m%Y')
-        api_params = [self.api_url,
-                      kwargs['ststat'],
+        api_params = [kwargs['ststat'],
                       stdate.year,
                       stdate.strftime('%m'),
                       stdate.strftime('%d'),
                       kwargs['sttime']]
-        ccall = '{0}json/search/{1}/{2}/{3}/{4}/{5}'.format(*api_params)
+        ccall = '{0}json/search/{1}/{2}/{3}/{4}/{5}'.format(self.api_url, *api_params)
         print(ccall)
         services = r.get(ccall, auth=r.auth.HTTPBasicAuth(self.api_username, self.api_password))
         return services.json()

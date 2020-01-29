@@ -75,19 +75,13 @@ def c2cbot(c2cbotaccess, rttapi_username, rttapi_password, rttapi_url):
 def service(c2cbotaccess, startstation, endstation, startdate, enddate, 
             starttime, endtime):
     """search sub-command to run a service search."""
-    click.secho('{0}-{1}-{2}-{3}-{4}-{5}'.format(c2cbotaccess['api_username'], 
-                                           startstation,
-                                           endstation,
-                                           startdate,
-                                           starttime,
-                                           endtime))
+    print_version(cli_name, cli_version)
     ss = rttapi.resource("service", c2cbotaccess)
-    print(ss.get_service(ststat=startstation,
-                         enstat=endstation,
-                         stdate=startdate,
-                         endate=enddate,
-                         sttime=starttime,
-                         entime=endtime))
+    s_params = {'ststat': startstation,
+                'stdate': startdate,
+                'sttime': starttime}
+    services = ss.get_service(**s_params)
+    print(services)
 
 
 # Register sub-commands.
